@@ -638,6 +638,107 @@
             font-size: 16px;
             color: white;
         }
+
+        @media(max-width:1285px){
+            html{
+                font-size: 55%;
+            }
+            .services-container{
+                padding-bottom: 7rem;
+                grid-template-columns: repeat(2,1fr);
+                margin: 0 5rem;
+            }
+        }
+
+         @media(max-width:991px){
+            header{
+                padding: 2rem 3%;
+            }
+            .timeline-items::before{
+            left: 7px;
+        }
+        section{
+            padding: 10rem 3% 2rem;
+        }
+        .timeline-item:nth-child(odd){
+            padding-right: 0;
+            text-align: left;
+        }
+        .timeline-item:nth-child(odd),
+        .timeline-item:nth-child(even){
+            padding-left: 37px;
+        }
+        .timeline-dot{
+            left: 0;
+        }
+        .services{
+            padding-bottom: 7rem;
+        }
+        .testimonials .wrapper{
+            grid-template-columns: repeat(1,1fr);
+        }
+        .contact form{
+            flex-direction: column;
+        }
+        .footer{
+            padding: 2rem 3%;
+        }
+        }
+
+        
+        @media(max-width:895px){
+            #menu-icon{
+                display: block;
+            }
+            .navbar{
+                position: absolute;
+                top: 100%;
+                right: 0;
+                width: 50%;
+                padding: 1rem 3%;
+                background: rgba(0, 0, 0, 0.8);
+                backdrop-filter: blur(20px);
+                border-bottom-left-radius: 2rem;
+                border-left: 2px solid #ff00bf;
+                border-bottom: 2px solid #ff00bf;
+                display: none;
+            }
+            .navbar .active{
+                display: block;
+            }
+            .navbar a{
+                display: block;
+                font-size: 2rem;
+                margin: 3rem 0;
+                color: white;
+            }
+            .home{
+                flex-direction: column-reverse;
+                margin: 5rem 4rem;
+            }
+            .home-content{
+                font-size: 2.6rem;
+            }
+            .home-content h1{
+                font-size: 8rem;
+                margin-top: 3rem;
+            }
+            .home-content p{
+                max-width: 600px;
+                margin: 0 auto;
+            }
+            .home-img img{
+                width: 56vw;
+            }
+            .services h2{
+                margin-bottom: 3rem;
+            }
+            .services-container{
+                grid-template-columns: repeat(1,1fr);
+            }
+        }
+
+        
     </style>
 </head>
 <body>
@@ -860,8 +961,33 @@
         </footer>
     </section>
 
-    <script src="script.js">
-        
+     <script >
+        let menuIcon = document.querySelector('#menu-icon');
+        let navbar = document.querySelector('navbar');
+        let sections = document.querySelectorAll('section');
+        let navLinks = document.querySelectorAll('header nav a');
+
+        window.onscroll = () =>{
+            sections.forEach(sec => {
+                let top = window.scrolly;
+                let offset = sec.offsetTop - 150;
+                let height = sec.offsetHeight;
+                let id = sec.getAttribute('id');
+
+                if(top >= offset && top < offset + height){
+                    navLinks.forEach(links => {
+                        links.classList.remove('active');
+                        document.querySelector('header nav a [href*=' + id + ']').classList.add('active')
+                    })
+                }
+            })
+        }
+
+        menuIcon.onclick = () =>{
+            menuIcon.classList.toggle('bx-x');
+            navbar.classList.toggle('active');
+        }
+
     </script>
 </body>
 </html>
